@@ -5,7 +5,14 @@
 
 This repo contains a [stb-style](https://github.com/nothings/stb/blob/master/docs/stb_howto.txt) header only library. This library depends on [url.h](https://github.com/hughdavenport/url.h) of atleast version `1.0.0`. Along side that, you need [http.h](https://github.com/hughdavenport/http.h/raw/refs/heads/main/http.h).
 
-This was developed during a [YouTube series](https://www.youtube.com/watch?v=dqw7B6eR9P8&list=PL5r5Q39GjMDfetFdGmnhjw1svsALW1HIY) where I implement [bittorrent from scratch](https://github.com/hughdavenport/codecrafters-bittorrent-c), where [SHA-1](https://github.com/hughdavenport/sha1.h), and [URL parsing](https://github.com/hughdavenport/url.h/raw/refs/heads/main/url.h) and [HTTP communication](https://github.com/hughdavenport/http.h) is a necessary component.
+HTTP is defined is several versions, notably [HTTP/1.0](https://datatracker.ietf.org/doc/html/rfc1945), and [HTTP/1.1](https://datatracker.ietf.org/doc/html/rfc9112). There was also 0.9, and newer [HTTP/2](https://datatracker.ietf.org/doc/html/rfc9113) and [HTTP/3](https://datatracker.ietf.org/doc/html/rfc9114). This library implements a small subset of HTTP/1.0, but will support single responses from HTTP/1.1 servers.
+
+This library was developed during a [YouTube series](https://www.youtube.com/watch?v=dqw7B6eR9P8&list=PL5r5Q39GjMDfetFdGmnhjw1svsALW1HIY) where I implement [bittorrent from scratch](https://github.com/hughdavenport/codecrafters-bittorrent-c), which drove me to create the following libraries:
+- Bencode decoding in [bencode.h](https://github.com/hughdavenport/bencode.h/raw/refs/heads/main/bencode.h)
+- SHA-1 hashing in [sha1.h](https://github.com/hughdavenport/sha1.h)
+- URL parsing in [url.h](https://github.com/hughdavenport/url.h/raw/refs/heads/main/url.h)
+- HTTP communication in [http.h](https://github.com/hughdavenport/http.h)
+
 
 To use the library, ensure [url.h](https://github.com/hughdavenport/url.h) has been setup then `#define HTTP_IMPLEMENTATION` exactly once (in your main.c may be a good place). You can `#include` the file as many times as you like.
 
