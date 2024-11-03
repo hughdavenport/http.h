@@ -39,13 +39,13 @@ int main(int argc, char **argv) {
     }
 
     URL url = {0};
+    HttpResponse response = {0};
     if (!parse_url(argv[1], argv[1] + strlen(argv[1]), &url)) {
         fprintf(stderr, "Invalid URL: %s.\n", argv[1]);
         goto end;
     }
 
     ret = EX_UNAVAILABLE;
-    HttpResponse response = {0};
     if (!send_http_request(&url, &agent, &headers, &response)) {
         fprintf(stderr, "Error occurred while sending request.\n");
         goto end;
