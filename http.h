@@ -27,7 +27,7 @@ SOFTWARE.
 
 #define HTTP_H_VERSION_MAJOR 1
 #define HTTP_H_VERSION_MINOR 1
-#define HTTP_H_VERSION_PATCH 0
+#define HTTP_H_VERSION_PATCH 1
 #define STRINGIFY(x) #x
 #define TOSTRING(x) STRINGIFY(x)
 #define HTTP_H_VERSION_MAJOR_S TOSTRING(HTTP_H_VERSION_MAJOR)
@@ -325,7 +325,12 @@ bool _read_http_response(int sock, HttpResponse *response) {
         }
         *colon = 0;
         if (strncasecmp(line, "Content-Length", strlen("Content-Length")) == 0) {
-            response->content_length = atol(colon + 1);
+            long content_length = atol(colon + 1);
+            if (content_length < 0) {
+                fprintf(stderr, "Negative content-length %ld\n", content_length);
+                goto cleanup;
+            }
+            response->content_length = content_length;
             fprintf(stderr, "Content-Length: %ld\n", response->content_length);
         }
         *colon = ':';
